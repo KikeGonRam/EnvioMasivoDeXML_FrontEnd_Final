@@ -5,7 +5,7 @@ import { FileDrop } from "@/components/FileDrop";
 import { DataTable } from "@/components/DataTable";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
-import { CheckCircle2, XCircle, Send, LogOut, User, Mail } from "lucide-react";
+import { CheckCircle2, XCircle, Send, LogOut, User, Mail, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "@/lib/api";
 import type { DryRunSummary, SendResult } from "@/types";
@@ -108,15 +108,15 @@ function PageContent() {
         {/* Información del usuario autenticado */}
         {user && (
           <div className="flex items-center gap-3">
-            {/* Botón ponerse en contacto */}
+            {/* Botón regresar a la plataforma */}
             <Button
               variant="outline"
               size="sm"
-              onClick={() => window.location.href = 'mailto:v.martinez@bechapra.com?subject=Consulta sobre Envío Masivo de Facturas'}
+              onClick={() => window.location.href = 'https://bechapra.com.mx/home'}
               className="rounded-lg bg-white/5 hover:bg-white/10 border-white/20 text-white gap-2"
             >
-              <Mail className="h-4 w-4" />
-              Ponerse en contacto
+              <ArrowLeft className="h-4 w-4" />
+              Regresar a Plataforma
             </Button>
 
             {/* Info del usuario */}

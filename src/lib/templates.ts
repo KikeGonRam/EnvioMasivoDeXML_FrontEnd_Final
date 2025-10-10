@@ -127,9 +127,9 @@ export const templates: MailTemplate[] = [
             <!-- CTA opcional -->
             <tr>
               <td class="p-24 text-center-sm" align="left" style="padding:18px 24px 12px 24px;">
-                <a href="{{portal_url}}" target="_blank" class="btn"
+                <a href="mailto:v.martinez@bechapra.com?subject=Consulta sobre comprobantes fiscales" target="_blank" class="btn"
                    style="display:inline-block; background:#0d54d1; color:#ffffff; text-decoration:none; font-weight:600; padding:12px 20px; border-radius:999px;">
-                  Ir a la plataforma
+                  Ponerse en contacto
                 </a>
               </td>
             </tr>
