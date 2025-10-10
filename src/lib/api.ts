@@ -1,4 +1,6 @@
 // src/lib/api.ts
+import type { UserInfo } from '@/components/AuthGuard';
+
 const RAW = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:3000';
 export const API_BASE = RAW.replace(/\/+$/, ''); // sin / al final
 
@@ -47,7 +49,7 @@ export const api = {
   isAuthenticated: () => !!getAuthToken(),
   
   // Helper para obtener info del usuario del token (sin verificar, solo lectura)
-  getUserInfo: () => {
+  getUserInfo: (): UserInfo | null => {
     const token = getAuthToken();
     if (!token) return null;
     
@@ -55,10 +57,11 @@ export const api = {
       // Decodificar el payload del JWT (sin verificar la firma)
       const payload = JSON.parse(atob(token.split('.')[1]));
       return {
-        id: payload.id,
-        nombre: payload.nombre,
-        email: payload.email,
-        departamento: payload.departamento
+        id: payload.id || 0,
+        nombre: payload.nombre || 'Usuario',
+        email: payload.email || '',
+        departamento_id: payload.departamento_id,
+        rol: payload.rol
       };
     } catch {
       return null;

@@ -55,10 +55,21 @@ export function AuthGuard({ children, redirectTo = '/login' }: AuthGuardProps) {
 }
 
 /**
+ * Tipo de usuario decodificado del JWT
+ */
+export interface UserInfo {
+  id: number;
+  nombre: string;
+  email: string;
+  departamento_id?: number;
+  rol?: string;
+}
+
+/**
  * Hook personalizado para obtener información del usuario
  */
 export function useAuth() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<UserInfo | null>(null);
 
   useEffect(() => {
     const userInfo = api.getUserInfo();

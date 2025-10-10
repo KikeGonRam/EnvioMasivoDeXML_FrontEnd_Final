@@ -4,7 +4,7 @@ jobDir: string;
 summary: {
 totals: { destinatarios:number; advertencias:number };
 detalle: Array<{ email:string; cliente:string; xml:number; pdf:number }>;
-warnings: any[];
+warnings: string[];
 };
 report: string;
 };
@@ -15,6 +15,6 @@ ok: boolean;
 jobDir: string;
 sent: number;
 skipped: number;
-warnings: any[];
+warnings: string[];
 log: Array<{ email:string; cliente:string; attachments?:number; mode?:string; sizeMB?:number; messageId?:string; error?:string }>;
 };

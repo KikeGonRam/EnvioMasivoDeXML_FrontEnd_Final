@@ -68,8 +68,9 @@ function PageContent() {
       setDrySummary(data);
       setSendResult(null);
       toast.success("Simulación lista.");
-    } catch (e: any) {
-      toast.error(e?.message || "Error en simulación");
+    } catch (e: unknown) {
+      const error = e as Error;
+      toast.error(error?.message || "Error en simulación");
     } finally {
       setLoading(false);
     }
@@ -91,8 +92,9 @@ function PageContent() {
       const data = await api.send(fd);
       setSendResult(data);
       toast.success(`Envío finalizado: ${data.sent} OK / ${data.skipped} con error`);
-    } catch (e: any) {
-      toast.error(e?.message || "Error en envío");
+    } catch (e: unknown) {
+      const error = e as Error;
+      toast.error(error?.message || "Error en envío");
     } finally {
       setLoading(false);
       setMode("idle");
