@@ -80,6 +80,8 @@ export function useAuth() {
     user,
     isAuthenticated: api.isAuthenticated(),
     logout: () => {
+      // Limpiar ambos tokens por si acaso
+      localStorage.removeItem('auth_token');
       localStorage.removeItem('token');
       window.location.href = process.env.NEXT_PUBLIC_BACKEND_LOGIN || 'http://localhost:5000/login';
     }

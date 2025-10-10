@@ -11,10 +11,12 @@ function assertOk(res: Response) {
 /**
  * Obtiene el token de autenticación del localStorage
  * Este token proviene del BackFinal después del login
+ * IMPORTANTE: BackFinal guarda el token como 'auth_token'
  */
 function getAuthToken(): string | null {
   if (typeof window === 'undefined') return null;
-  return localStorage.getItem('token');
+  // Intentar primero con 'auth_token' (usado por BackFinal)
+  return localStorage.getItem('auth_token') || localStorage.getItem('token');
 }
 
 /**
