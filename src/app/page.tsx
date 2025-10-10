@@ -5,13 +5,11 @@ import { FileDrop } from "@/components/FileDrop";
 import { DataTable } from "@/components/DataTable";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
-import { Download, Filter, CheckCircle2, XCircle, Send, LogOut, User } from "lucide-react";
+import { CheckCircle2, XCircle, Send, LogOut, User } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "@/lib/api";
-import { toCSVAndDownload } from "@/lib/csv";
 import type { DryRunSummary, SendResult } from "@/types";
 import { Glass } from "@/components/Glass";
-import { SearchBar } from "@/components/SearchBar";
 import { StatCard } from "@/components/StatCard";
 import { EmailTemplates } from "@/components/EmailTemplates";
 import { templates } from "@/lib/templates";
@@ -34,8 +32,7 @@ function PageContent() {
   const [zips, setZips] = useState<File[]>([]);
   const [csv, setCsv] = useState<File | null>(null);
 
-  // Estado tabla/búsqueda
-  const [query, setQuery] = useState("");
+  // Estado tabla
   const [drySummary, setDrySummary] = useState<DryRunSummary | null>(null);
   const [sendResult, setSendResult] = useState<SendResult | null>(null);
 
@@ -44,12 +41,8 @@ function PageContent() {
       drySummary?.summary?.detalle ??
       sendResult?.log?.map((l) => ({ email: l.email, cliente: l.cliente, xml: 0, pdf: 0 })) ??
       [];
-    if (!query.trim()) return rows;
-    const q = query.toLowerCase();
-    return rows.filter(
-      (r) => r.email?.toLowerCase().includes(q) || r.cliente?.toLowerCase().includes(q)
-    );
-  }, [drySummary, sendResult, query]);
+    return rows;
+  }, [drySummary, sendResult]);
 
   // KPIs
   const enviados = sendResult?.sent ?? 0;
@@ -140,31 +133,6 @@ function PageContent() {
         <StatCard title="Correos fallidos" value={fallidos} icon={XCircle} tone="rose" />
         <StatCard title="En proceso" value={enProceso} icon={Send} tone="sky" />
       </div>
-
-      {/* Buscador + acciones */}
-      <Glass>
-        <CardContent className="p-4">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <SearchBar value={query} onChange={setQuery} className="md:w-[420px]" />
-            <div className="flex items-center gap-2">
-              <Button type="button" variant="secondary" className="rounded-xl bg-white/15 text-white border-white/20">
-                <Filter className="mr-2 h-4 w-4" /> Filtros
-              </Button>
-              <Button
-                type="button"
-                className="rounded-xl bg-emerald-500 hover:bg-emerald-600"
-                onClick={() => {
-                  const detalle = drySummary?.summary?.detalle;
-                  if (!detalle?.length) return toast.error("Nada que exportar");
-                  toCSVAndDownload(detalle, "resumen.csv");
-                }}
-              >
-                <Download className="mr-2 h-4 w-4" /> Exportar
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Glass>
 
       {/* Uploader */}
       <Glass>
