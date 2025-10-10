@@ -5,7 +5,7 @@ import { FileDrop } from "@/components/FileDrop";
 import { DataTable } from "@/components/DataTable";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
-import { CheckCircle2, XCircle, Send, LogOut, User } from "lucide-react";
+import { CheckCircle2, XCircle, Send, LogOut, User, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "@/lib/api";
 import type { DryRunSummary, SendResult } from "@/types";
@@ -107,22 +107,36 @@ function PageContent() {
         
         {/* Información del usuario autenticado */}
         {user && (
-          <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md rounded-xl px-4 py-2">
-            <div className="flex items-center gap-2">
-              <User className="h-5 w-5" />
-              <div>
-                <p className="text-sm font-medium">{user.nombre}</p>
-                <p className="text-xs opacity-70">{user.email}</p>
-              </div>
-            </div>
+          <div className="flex items-center gap-3">
+            {/* Botón regresar a la plataforma */}
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
-              onClick={logout}
-              className="rounded-lg hover:bg-white/20"
+              onClick={() => window.location.href = 'https://bechapra.com.mx/home'}
+              className="rounded-lg bg-white/5 hover:bg-white/10 border-white/20 text-white gap-2"
             >
-              <LogOut className="h-4 w-4" />
+              <ArrowLeft className="h-4 w-4" />
+              Regresar a Plataforma
             </Button>
+
+            {/* Info del usuario */}
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md rounded-xl px-4 py-2">
+              <div className="flex items-center gap-2">
+                <User className="h-5 w-5" />
+                <div>
+                  <p className="text-sm font-medium">{user.nombre}</p>
+                  <p className="text-xs opacity-70">{user.email}</p>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={logout}
+                className="rounded-lg hover:bg-white/20"
+              >
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         )}
       </div>
