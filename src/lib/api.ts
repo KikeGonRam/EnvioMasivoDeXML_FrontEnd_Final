@@ -1,7 +1,7 @@
 // src/lib/api.ts
 import type { UserInfo } from '@/components/AuthGuard';
 
-const RAW = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:3000';
+const RAW = process.env.NEXT_PUBLIC_API_BASE || 'http://46.202.177.106:3000';
 export const API_BASE = RAW.replace(/\/+$/, ''); // sin / al final
 
 function assertOk(res: Response) {

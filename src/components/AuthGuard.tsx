@@ -24,7 +24,7 @@ export function AuthGuard({ children, redirectTo = '/login' }: AuthGuardProps) {
       
       if (!authenticated) {
         // Redirigir al login del BackFinal
-        const backendLoginUrl = process.env.NEXT_PUBLIC_BACKEND_LOGIN || 'http://localhost:5000/login';
+  const backendLoginUrl = process.env.NEXT_PUBLIC_BACKEND_LOGIN || 'http://46.202.177.106:5000/login';
         window.location.href = backendLoginUrl;
         return;
       }
@@ -83,7 +83,7 @@ export function useAuth() {
       // Limpiar ambos tokens por si acaso
       localStorage.removeItem('auth_token');
       localStorage.removeItem('token');
-      window.location.href = process.env.NEXT_PUBLIC_BACKEND_LOGIN || 'http://localhost:5000/login';
+  window.location.href = process.env.NEXT_PUBLIC_BACKEND_LOGIN || 'http://46.202.177.106:5000/login';
     }
   };
 }
